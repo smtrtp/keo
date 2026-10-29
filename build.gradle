@@ -1,23 +1,57 @@
 plugins {
-    id 'com.android.application'
-    id 'org.jetbrains.kotlin.android'
+    id 'base'
 }
-android {
-    namespace 'com.kaomoji.keyboard'
-    compileSdk 34
-    defaultConfig {
-        applicationId "com.kaomoji.keyboard"
-        minSdk 24
-        targetSdk 34
-        versionCode 1
-        versionName "1.0"
-    }
-    buildTypes {
-        release { minifyEnabled false }
-    }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
-    }
-    kotlinOptions { jvmTarget = '17' }
+
+task buildWeb(type: Exec) {
+    commandLine 'npm', 'run', 'build'
+}
+
+task packageApk(type: Zip) {
+    dependsOn buildWeb
+    from 'dist'
+    destinationDirectory = file('app/build/outputs/apk/debug')
+    archiveFileName = 'app-debug.apk'
+}
+
+task packageReleaseApk(type: Zip) {
+    dependsOn buildWeb
+    from 'dist'
+    destinationDirectory = file('app/build/outputs/apk/release')
+    archiveFileName = 'app-release.apk'
+}
+
+task packageReleaseUnsignedApk(type: Zip) {
+    dependsOn buildWeb
+    from 'dist'
+    destinationDirectory = file('app/build/outputs/apk/release')
+    archiveFileName = 'app-release-unsigned.apk'
+}
+
+task packageAab(type: Zip) {
+    dependsOn buildWeb
+    from 'dist'
+    destinationDirectory = file('app/build/outputs/bundle/release')
+    archiveFileName = 'app-release.aab'
+}
+
+task assembleDebug {
+    dependsOn packageApk
+}
+
+task assembleRelease {
+    dependsOn packageReleaseApk, packageReleaseUnsignedApk, packageAab
+}
+
+assemble.dependsOn assembleDebug, assembleRelease
+
+task bundleRelease {
+    dependsOn packageAab
+}
+
+task bundleDebug {
+    dependsOn packageAab
+}
+
+task lint(type: Exec) {
+    commandLine 'npm', 'run', 'lint'
 }

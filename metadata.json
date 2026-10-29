@@ -1,0 +1,8 @@
+{
+  "name": "Kaomoji Keyboard & Syllabary",
+  "description": "An interactive keyboard and phonetic transliterator for the Kaomojic language, featuring glyph ciphers, syllable speech synthesis, customizable themes, and kaomoji builders.",
+  "permissions": [],
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
