@@ -6,50 +6,27 @@ task buildWeb(type: Exec) {
     commandLine 'npm', 'run', 'build'
 }
 
-task packageApk(type: Zip) {
+task buildRealApk(type: Exec) {
     dependsOn buildWeb
-    from 'dist'
-    destinationDirectory = file('app/build/outputs/apk/debug')
-    archiveFileName = 'app-debug.apk'
-}
-
-task packageReleaseApk(type: Zip) {
-    dependsOn buildWeb
-    from 'dist'
-    destinationDirectory = file('app/build/outputs/apk/release')
-    archiveFileName = 'app-release.apk'
-}
-
-task packageReleaseUnsignedApk(type: Zip) {
-    dependsOn buildWeb
-    from 'dist'
-    destinationDirectory = file('app/build/outputs/apk/release')
-    archiveFileName = 'app-release-unsigned.apk'
-}
-
-task packageAab(type: Zip) {
-    dependsOn buildWeb
-    from 'dist'
-    destinationDirectory = file('app/build/outputs/bundle/release')
-    archiveFileName = 'app-release.aab'
+    commandLine 'python3', 'scripts/build_real_apk.py'
 }
 
 task assembleDebug {
-    dependsOn packageApk
+    dependsOn buildRealApk
 }
 
 task assembleRelease {
-    dependsOn packageReleaseApk, packageReleaseUnsignedApk, packageAab
+    dependsOn buildRealApk
 }
 
 assemble.dependsOn assembleDebug, assembleRelease
 
 task bundleRelease {
-    dependsOn packageAab
+    dependsOn buildRealApk
 }
 
 task bundleDebug {
-    dependsOn packageAab
+    dependsOn buildRealApk
 }
 
 task lint(type: Exec) {

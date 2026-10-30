@@ -49,6 +49,38 @@ export const AndroidSetupModal: React.FC<AndroidSetupModalProps> = ({ isOpen, on
             </p>
           </div>
 
+          {/* Direct APK Download Banner */}
+          <div className="p-4 rounded-2xl bg-gradient-to-r from-emerald-950/60 to-blue-950/60 border border-emerald-500/30">
+            <div className="flex items-center justify-between gap-3 mb-2">
+              <div className="flex items-center gap-2.5">
+                <div className="p-2 rounded-xl bg-emerald-500/20 text-emerald-400">
+                  <Download className="w-5 h-5" />
+                </div>
+                <div>
+                  <h4 className="font-bold text-sm text-neutral-100">Download Kaomoji Keyboard APK</h4>
+                  <p className="text-[11px] text-neutral-400">Precompiled Android APK ready for sideloading (~154 KB)</p>
+                </div>
+              </div>
+            </div>
+            <div className="flex flex-wrap gap-2 mt-3">
+              <a
+                href="/kaomoji-keyboard.apk"
+                download="kaomoji-keyboard.apk"
+                className="flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs shadow-md transition-all"
+              >
+                <Download className="w-4 h-4" />
+                <span>Download kaomoji-keyboard.apk</span>
+              </a>
+              <a
+                href="/app-debug.apk"
+                download="app-debug.apk"
+                className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-neutral-800 hover:bg-neutral-700 text-neutral-300 font-medium text-xs border border-neutral-700 transition-all"
+              >
+                <span>app-debug.apk</span>
+              </a>
+            </div>
+          </div>
+
           <div className="space-y-3">
             <div className="p-3.5 rounded-xl bg-neutral-950/60 border border-neutral-800 flex gap-3">
               <span className="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 font-bold flex items-center justify-center shrink-0">

@@ -18,7 +18,8 @@ import {
   VolumeX,
   Sliders,
   Smile,
-  ShieldCheck
+  ShieldCheck,
+  Download
 } from 'lucide-react';
 
 export default function App() {
@@ -160,6 +161,18 @@ export default function App() {
               {settings.soundClicks ? <Volume2 className="w-4 h-4" /> : <VolumeX className="w-4 h-4" />}
             </button>
 
+            {/* Direct APK Download */}
+            <a
+              href="/kaomoji-keyboard.apk"
+              download="kaomoji-keyboard.apk"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-emerald-600/20 text-emerald-300 border border-emerald-500/30 hover:bg-emerald-600/30 transition-all shadow-sm"
+              title="Download compiled APK file"
+            >
+              <Download className="w-3.5 h-3.5 text-emerald-400" />
+              <span className="hidden sm:inline">Download</span>
+              <span>APK</span>
+            </a>
+
             {/* Android Setup & APK guide */}
             <button
               type="button"
@@ -167,7 +180,7 @@ export default function App() {
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-blue-600/20 text-blue-400 border border-blue-500/30 hover:bg-blue-600/30 transition-all"
             >
               <Smartphone className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">Android APK</span>
+              <span className="hidden sm:inline">Setup</span>
               <span>Guide</span>
             </button>
           </div>
